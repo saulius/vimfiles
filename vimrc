@@ -113,3 +113,8 @@ if has("statusline") && !&cp
   set statusline+=Buf:#%n
   set statusline+=[%b][0x%B]
 endif
+
+" ctrlp config
+map <Leader>j :CtrlP<CR>
+map <Leader>m :CtrlPMRU<CR>
+map <Leader>b :CtrlPBuffer<CR>
