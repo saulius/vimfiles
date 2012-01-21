@@ -26,7 +26,7 @@ files inside the ".vim" directory.
 ## Plugins:
 
 * ack
-* command-t
+* ctrlp
 * commentary
 * endwise
 * fugitive
@@ -35,3 +35,7 @@ files inside the ".vim" directory.
 * haml
 * scss
 * coffee-script
+* javascript
+* vim-colors-solarized
+* vim-powerline
+* vim-slim
