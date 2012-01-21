@@ -15,7 +15,13 @@ call pathogen#infect()
 filetype plugin indent on
 
 set background=dark
-color molokai
+syntax on
+set t_Co=256
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_bold=0
+let g:solarized_visibility="normal"
+color solarized
 set nonumber
 set ruler       " show the cursor position all the time
 set cursorline
