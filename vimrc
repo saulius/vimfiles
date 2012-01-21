@@ -124,3 +124,6 @@ endif
 map <Leader>j :CtrlP<CR>
 map <Leader>m :CtrlPMRU<CR>
 map <Leader>b :CtrlPBuffer<CR>
+
+" support global clipboard
+set clipboard=unnamed
