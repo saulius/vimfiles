@@ -82,18 +82,6 @@ map Q gq
 
 let mapleader=","
 
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
-map <leader>gg :topleft 100 :split Gemfile<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-" http://vimcasts.org/e/14
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-
 " ignore Rubinius, Sass cache files
 set wildignore+=*.rbc,*.scssc,*.sassc
 
@@ -119,14 +107,9 @@ if has("statusline") && !&cp
   " Start the status line
   set statusline=%f\ %m\ %r
 
-  " Add fugitive
-  set statusline+=%{fugitive#statusline()}
-
   " Finish the statusline
   set statusline+=Line:%l/%L[%p%%]
   set statusline+=Col:%v
   set statusline+=Buf:#%n
   set statusline+=[%b][0x%B]
 endif
-
-let g:CommandTMaxHeight=10
