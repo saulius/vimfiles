@@ -1,5 +1,6 @@
 ""
 "" Thanks:
+""   Mislav Marohnić  <http://mislav.uniqpath.com/>
 ""   Gary Bernhardt  <destroyallsoftware.com>
 ""   Drew Neil  <vimcasts.org>
 ""   Tim Pope  <tbaggery.com>
@@ -108,12 +109,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-
-" disable cursor keys in normal mode
-map <Left>  :echo "no!"<cr>
-map <Right> :echo "no!"<cr>
-map <Up>    :echo "no!"<cr>
-map <Down>  :echo "no!"<cr>
 
 set backupdir=~/.vim/_backup    " where to put backup files.
 set directory=~/.vim/_temp      " where to put swap files.
