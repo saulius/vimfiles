@@ -138,3 +138,6 @@ set ttimeout
 set timeoutlen=50
 set lazyredraw
 set ttyfast
+
+" Autodelte trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
