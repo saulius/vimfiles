@@ -136,3 +136,5 @@ set clipboard=unnamed
 set notimeout
 set ttimeout
 set timeoutlen=50
+set lazyredraw
+set ttyfast
