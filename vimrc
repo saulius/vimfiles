@@ -131,3 +131,8 @@ map <Leader>b :CtrlPBuffer<CR>
 
 " support global clipboard
 set clipboard=unnamed
+
+" prevent scroll lag
+set notimeout
+set ttimeout
+set timeoutlen=50
