@@ -22,7 +22,6 @@ let g:solarized_termtrans=1
 let g:solarized_bold=0
 let g:solarized_visibility="normal"
 color solarized
-set nonumber
 set ruler       " show the cursor position all the time
 set cursorline
 set showcmd     " display incomplete commands
@@ -141,3 +140,7 @@ set ttyfast
 
 " Autodelte trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+
+" 80 col width marker
+set colorcolumn=80
+hi ColorColumn ctermbg=black guibg=black
