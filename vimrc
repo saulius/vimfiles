@@ -144,3 +144,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 " 80 col width marker
 set colorcolumn=80
 hi ColorColumn ctermbg=black guibg=black
+
+" Map ,e and ,v to open files in the same directory as the current file
+" by @garybernhardt
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
