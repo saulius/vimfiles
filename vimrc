@@ -150,3 +150,7 @@ hi ColorColumn ctermbg=black guibg=black
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
+
+" Wildmode
+set wildmenu
+set wildmode=longest,full
