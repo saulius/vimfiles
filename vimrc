@@ -157,3 +157,9 @@ map <leader>v :view %%
 " Wildmode
 set wildmenu
 set wildmode=longest,full
+
+" Tabular
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
