@@ -14,14 +14,17 @@ set encoding=utf-8
 call pathogen#infect()
 filetype plugin indent on
 
-set background=dark
+set background=light
 syntax on
 set t_Co=256
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_bold=0
-let g:solarized_visibility="normal"
-color solarized
+" Color scheme
+colorscheme github
+highlight NonText guibg=#060606
+highlight Folded  guibg=#0A0A0A guifg=#9090D0
+
+" Numbers
+set number
+set numberwidth=5"
 set ruler       " show the cursor position all the time
 set cursorline
 set showcmd     " display incomplete commands
@@ -38,7 +41,6 @@ set expandtab                     " use spaces, not tabs
 set list                          " Show invisible characters
 set backspace=indent,eol,start    " backspace through everything in insert mode
 " List chars
-set nonumber
 set listchars=""                  " Reset the listchars
 set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
 set listchars+=trail:.            " show trailing spaces as dots
@@ -146,7 +148,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " 80 col width marker
 set colorcolumn=80
-hi ColorColumn ctermbg=black guibg=black
+hi ColorColumn ctermbg=250 guibg=#ECECEC
 
 " Map ,e and ,v to open files in the same directory as the current file
 " by @garybernhardt
