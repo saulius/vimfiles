@@ -160,12 +160,6 @@ map <leader>v :view %%
 set wildmenu
 set wildmode=longest,full
 
-" Tabular
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-
 " rspec mappings
 map <Leader>st :call RunCurrentSpecFile()<CR>
 map <Leader>ss :call RunNearestSpec()<CR>
@@ -191,7 +185,7 @@ function! SpecRunner()
   if filereadable("zeus.json")
     return "zeus "
   else
-    return ""
+    return "bundle exec "
   endif
 endfunction
 
