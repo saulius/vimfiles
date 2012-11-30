@@ -163,8 +163,9 @@ let g:ScreenImpl = 'Tmux'
 let g:ScreenShellTmuxInitArgs = '-2'
 let g:ScreenShellInitialFocus = 'shell'
 let g:ScreenShellQuitOnVimExit = 0
-map <F5> :ScreenShellVertical<CR>
+let g:ScreenShellHeight = 10
+map <F5> :ScreenShell<CR>
 command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
-map <Leader>rc :ScreenShellVertical bundle exec rails c<CR>
+map <Leader>rc :ScreenShell bundle exec rails c<CR>
 map <Leader>sl :w<CR> :call ScreenShellSend("rspec ".@% . ':' . line('.'))<CR>
 map <Leader>sf :w<CR> :call ScreenShellSend("rspec ".@%)<CR>
