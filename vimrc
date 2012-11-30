@@ -18,7 +18,7 @@ set background=light
 syntax on
 set t_Co=256
 colorscheme espresso_soda
-:set fillchars+=vert:\ 
+:set fillchars+=vert:\
 
 " Numbers
 set number
@@ -158,49 +158,13 @@ map <leader>v :view %%
 set wildmenu
 set wildmode=longest,full
 
-" rspec mappings
-map <Leader>st :call RunCurrentSpecFile()<CR>
-map <Leader>ss :call RunNearestSpec()<CR>
-map <Leader>sl :call RunLastSpec()<CR>
-
-function! RunCurrentSpecFile()
-  if InSpecFile()
-    let l:command = SpecRunner() . "rspec " . @% . " -f documentation"
-    call SetLastSpecCommand(l:command)
-    call RunSpecs(l:command)
-  endif
-endfunction
-
-function! RunNearestSpec()
-  if InSpecFile()
-    let l:command = SpecRunner() . "rspec " . @% . " -l " . line(".") . " -f documentation"
-    call SetLastSpecCommand(l:command)
-    call RunSpecs(l:command)
-  endif
-endfunction
-
-function! SpecRunner()
-  if filereadable("zeus.json")
-    return "zeus "
-  else
-    return "bundle exec "
-  endif
-endfunction
-
-function! RunLastSpec()
-  if exists("t:last_spec_command")
-    call RunSpecs(t:last_spec_command)
-  endif
-endfunction
-
-function! InSpecFile()
-  return match(expand("%"), "_spec.rb$") != -1
-endfunction
-
-function! SetLastSpecCommand(command)
-  let t:last_spec_command = a:command
-endfunction
-
-function! RunSpecs(command)
-  execute ":w\|!clear && echo " . a:command . " && echo && " . a:command
-endfunction
+" Screen settings
+let g:ScreenImpl = 'Tmux'
+let g:ScreenShellTmuxInitArgs = '-2'
+let g:ScreenShellInitialFocus = 'shell'
+let g:ScreenShellQuitOnVimExit = 0
+map <F5> :ScreenShellVertical<CR>
+command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
+map <Leader>rc :ScreenShellVertical bundle exec rails c<CR>
+map <Leader>sl :w<CR> :call ScreenShellSend("rspec ".@% . ':' . line('.'))<CR>
+map <Leader>sf :w<CR> :call ScreenShellSend("rspec ".@%)<CR>
