@@ -6,6 +6,18 @@ task :update do
   sh "git submodule update --init"
 end
 
+desc %(Update each submodule from its upstream)
+task :submodule_pull do
+  system <<-EOS
+    git submodule foreach '
+      rev=$(git rev-parse HEAD)
+      git pull --quiet --ff-only --no-rebase origin master &&
+      git --no-pager log --no-merges --pretty=format:"%s %Cgreen(%ar)%Creset" --date=relative ${rev}..
+      echo
+    '
+  EOS
+end
+
 desc %(Make ~/.vimrc and ~/.gvimrc symlinks)
 task :link do
   %w[vimrc gvimrc].each do |script|
