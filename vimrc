@@ -18,7 +18,7 @@ set background=light
 syntax on
 set t_Co=256
 colorscheme espresso_soda
-:set fillchars+=vert:\
+:set fillchars+=vert:\ 
 
 " Numbers
 set number
