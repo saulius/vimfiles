@@ -55,3 +55,9 @@
 [submodule "bundle/vim-easytags"]
 	path = bundle/vim-easytags
 	url = https://github.com/xolox/vim-easytags.git
+[submodule "bundle/rtf_pygmentize"]
+	path = bundle/rtf_pygmentize
+	url = https://github.com/rafaelfranca/rtf_pygmentize.git
+[submodule "bundle/ZoomWin"]
+	path = bundle/ZoomWin
+	url = https://github.com/vim-scripts/ZoomWin.git

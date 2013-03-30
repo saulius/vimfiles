@@ -177,6 +177,17 @@ map <Leader>st :call RunCurrentSpecFile()<CR>
 map <Leader>ss :call RunNearestSpec()<CR>
 map <Leader>sl :call RunLastSpec()<CR>
 
+" rtf settings
+let g:rtfp_theme = 'colorful'
+let g:rtfp_font = 'Monaco'
+
+" Bubble single lines
+nmap <M-Up> ddkP
+nmap <M-Down> ddp
+" Bubble multiple lines
+vmap <M-Up> xkP`[V`]
+vmap <M-Down> xp`[V`]
+
 function! RunCurrentSpecFile()
   if InSpecFile()
     let l:command = SpecRunner() . "rspec " . @% . " -f documentation"
