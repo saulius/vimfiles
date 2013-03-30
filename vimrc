@@ -229,3 +229,5 @@ endfunction
 function! RunSpecs(command)
   call VimuxRunCommand("clear;". a:command . " " . expand("%"))
 endfunction
+
+
