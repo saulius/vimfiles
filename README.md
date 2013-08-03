@@ -37,5 +37,4 @@ files inside the ".vim" directory.
 * coffee-script
 * javascript
 * vim-colors-solarized
-* vim-powerline
 * vim-slim
