@@ -17,24 +17,22 @@ Prerequisites: ruby, git.
    `mv ~/.vim* ~/.gvim* my_backup`
 2. Clone this repo into ".vim":
    `git clone https://github.com/sauliusg/vimfiles ~/.vim`
-3. Go into ".vim" and run "rake":
-   `cd ~/.vim && rake`
+3. Symlink config files:
 
-This will install "~/.vimrc" and "~/.gvimrc" symlinks that point to
-files inside the ".vim" directory.
+    ````
+    ln -s ~/.vim/vimrc ~/.vimrc
+    ln -s ~/.vim/vimrc.bundles ~/.vimrc.bundle
+    ````
 
-## Plugins:
+4. Start vim and install bundles:
 
-* ack
-* ctrlp
-* commentary
-* endwise
-* fugitive
-* markdown
-* rails
-* haml
-* scss
-* coffee-script
-* javascript
-* vim-colors-solarized
-* vim-slim
+    ````
+    vim
+    :BundleInstall
+    ````
+
+To update bundles:
+
+````
+:BundleInstall!
+````
