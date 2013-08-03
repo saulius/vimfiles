@@ -18,7 +18,7 @@ set background=light
 syntax on
 set t_Co=256
 colorscheme espresso_soda
-:set fillchars+=vert:\ 
+:set fillchars+=vert:\
 
 " Numbers
 set number
@@ -43,9 +43,9 @@ set listchars=""                  " Reset the listchars
 set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
 set listchars+=trail:.            " show trailing spaces as dots
 set listchars+=extends:>          " The character to show in the last column when wrap is
-                                  " off and the line continues beyond the right of the screen
+                                " off and the line continues beyond the right of the screen
 set listchars+=precedes:<         " The character to show in the first column when wrap is
-                                  " off and the line continues beyond the left of the screen
+                                " off and the line continues beyond the left of the screen
 "" Searching
 set hlsearch                      " highlight matches
 set incsearch                     " incremental searching
@@ -54,34 +54,34 @@ set smartcase                     " ... unless they contain at least one capital
 set relativenumber
 
 function s:setupWrapping()
-  set wrap
-  set wrapmargin=2
-  set textwidth=72
+set wrap
+set wrapmargin=2
+set textwidth=72
 endfunction
 
 if has("autocmd")
-  " In Makefiles, use real tabs, not tabs expanded to spaces
-  au FileType make set noexpandtab
+" In Makefiles, use real tabs, not tabs expanded to spaces
+au FileType make set noexpandtab
 
-  " Make sure all markdown files have the correct filetype set and setup wrapping
-  au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown | call s:setupWrapping()
+" Make sure all markdown files have the correct filetype set and setup wrapping
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown | call s:setupWrapping()
 
-  " Treat JSON files like JavaScript
-  au BufNewFile,BufRead *.json set ft=javascript
+" Treat JSON files like JavaScript
+au BufNewFile,BufRead *.json set ft=javascript
 
-  " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-  au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
+" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
+au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-  " skim https://github.com/jfirebaugh/skim
-  au BufRead,BufNewFile *.{skim} set ft=slim
+" skim https://github.com/jfirebaugh/skim
+au BufRead,BufNewFile *.{skim} set ft=slim
 
-  " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
-  au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
+" make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
-  " Remember last location in file, but not for commit messages.
-  " see :help last-position-jump
-  au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g`\"" | endif
+" Remember last location in file, but not for commit messages.
+" see :help last-position-jump
+au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+  \| exe "normal! g`\"" | endif
 endif
 
 " provide some context when editing
@@ -159,25 +159,6 @@ map <leader>v :view %%
 set wildmenu
 set wildmode=longest,full
 
-" Vimux
-let VimuxUseNearestPane = 1
-let g:VimuxOrientation = "v"
-let g:VimuxHeight = "30"
-
-" Run last command executed by RunVimTmuxCommand
-map rl :RunLastVimTmuxCommand<CR>
-
-" Close all other tmux panes in current window
-map rx :CloseVimTmuxPanes<CR>
-
-" Interrupt any command running in the runner pane
-map rs :InterruptVimTmuxRunner<CR>
-
-" rspec mappings
-map <Leader>st :call RunCurrentSpecFile()<CR>
-map <Leader>ss :call RunNearestSpec()<CR>
-map <Leader>sl :call RunLastSpec()<CR>
-
 " rtf settings
 let g:rtfp_theme = 'colorful'
 let g:rtfp_font = 'Monaco'
@@ -189,48 +170,6 @@ nmap <M-Down> ddp
 vmap <M-Up> xkP`[V`]
 vmap <M-Down> xp`[V`]
 
-function! RunCurrentSpecFile()
-  if InSpecFile()
-    let l:command = SpecRunner() . "rspec " . @% . " -f documentation"
-    call SetLastSpecCommand(l:command)
-    call RunSpecs(l:command)
-  endif
-endfunction
-
-function! RunNearestSpec()
-  if InSpecFile()
-    let l:command = SpecRunner() . "rspec " . @% . " -l " . line(".") . " -f documentation"
-    call SetLastSpecCommand(l:command)
-    call RunSpecs(l:command)
-  endif
-endfunction
-
-function! SpecRunner()
-  if filereadable("zeus.json")
-    return "zeus "
-  else
-    return "bundle exec "
-  endif
-endfunction
-
-function! RunLastSpec()
-  if exists("t:last_spec_command")
-    call RunSpecs(t:last_spec_command)
-  endif
-endfunction
-
-function! InSpecFile()
-  return match(expand("%"), "_spec.rb$") != -1
-endfunction
-
-function! SetLastSpecCommand(command)
-  let t:last_spec_command = a:command
-endfunction
-
-function! RunSpecs(command)
-  call VimuxRunCommand("clear;". a:command . " " . expand("%"))
-endfunction
-
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -240,4 +179,22 @@ function! RenameFile()
         redraw!
     endif
 endfunction
+
 map <leader>n :call RenameFile()<cr>
+
+function! SpecRunner()
+  if filereadable("zeus.json")
+    return "zeus "
+  else
+    return "bundle exec "
+  endif
+endfunction
+
+let g:rspec_command = "Dispatch " . SpecRunner() . "rspec {spec}"
+
+" Rspec.vim mappings
+map <Leader>st :call RunCurrentSpecFile()<CR>
+map <Leader>ss :call RunNearestSpec()<CR>
+map <Leader>sl :call RunLastSpec()<CR>
+map <Leader>sa :call RunAllSpecs()<CR>
+map <Leader>sc :ccl<CR>
