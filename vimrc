@@ -14,6 +14,10 @@ set encoding=utf-8
 call pathogen#infect()
 filetype plugin indent on
 
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endi
+
 set background=light
 syntax on
 set t_Co=256
