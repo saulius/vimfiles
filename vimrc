@@ -51,6 +51,7 @@ set hlsearch                      " highlight matches
 set incsearch                     " incremental searching
 set ignorecase                    " searches are case insensitive...
 set smartcase                     " ... unless they contain at least one capital letter
+set relativenumber
 
 function s:setupWrapping()
   set wrap
@@ -115,15 +116,7 @@ set directory=~/.vim/_temp      " where to put swap files.
 
 if has("statusline") && !&cp
   set laststatus=2  " always show the status bar
-
-  " Start the status line
-  set statusline=%f\ %m\ %r
-
-  " Finish the statusline
-  set statusline+=Line:%l/%L[%p%%]
-  set statusline+=Col:%v
-  set statusline+=Buf:#%n
-  set statusline+=[%b][0x%B]
+  set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 endif
 
 " ctrlp config
@@ -238,4 +231,13 @@ function! RunSpecs(command)
   call VimuxRunCommand("clear;". a:command . " " . expand("%"))
 endfunction
 
-
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>n :call RenameFile()<cr>
