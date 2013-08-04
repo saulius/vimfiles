@@ -34,6 +34,12 @@ set showcmd     " display incomplete commands
 " for backgrounded buffers
 set hidden
 
+" Allow undoing for a little bit longer
+set undofile                " Save undo's after file closes
+set undodir=$HOME/.vim/undo " where to save undo histories
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
+
 "" Whitespace
 set nowrap                        " don't wrap lines
 set tabstop=2                     " a tab is two spaces
@@ -201,3 +207,6 @@ map <Leader>ss :call RunNearestSpec()<CR>
 map <Leader>sl :call RunLastSpec()<CR>
 map <Leader>sa :call RunAllSpecs()<CR>
 map <Leader>sc :ccl<CR>
+
+" fast saving
+map <Leader>w :w<cr>
