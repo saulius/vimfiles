@@ -13,6 +13,16 @@ set encoding=utf-8
 
 filetype plugin indent on
 
+" Setting up Vundle - the vim plugin bundler
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+  echo "Installing Vundle.."
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+endif
+" Setting up Vundle - the vim plugin bundler end
+
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endi
@@ -210,3 +220,6 @@ map <Leader>sc :ccl<CR>
 
 " fast saving
 map <Leader>w :w<cr>
+
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
