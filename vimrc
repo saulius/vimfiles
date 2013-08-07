@@ -45,6 +45,7 @@ set showcmd     " display incomplete commands
 set hidden
 
 " Allow undoing for a little bit longer
+silent !mkdir -p ~/.vim/undo
 set undofile                " Save undo's after file closes
 set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000         " How many undos
@@ -130,7 +131,9 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+silent !mkdir -p ~/.vim/_backup
 set backupdir=~/.vim/_backup    " where to put backup files.
+silent !mkdir -p ~/.vim/_temp
 set directory=~/.vim/_temp      " where to put swap files.
 
 if has("statusline") && !&cp
