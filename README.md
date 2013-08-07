@@ -21,7 +21,7 @@ Prerequisites: ruby, git.
 
     ````
     ln -s ~/.vim/vimrc ~/.vimrc
-    ln -s ~/.vim/vimrc.bundles ~/.vimrc.bundle
+    ln -s ~/.vim/vimrc.bundles ~/.vimrc.bundles
     ````
 
 4. Start vim and install bundles:
