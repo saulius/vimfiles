@@ -204,21 +204,26 @@ endfunction
 
 map <leader>n :call RenameFile()<cr>
 
-function! SpecRunner()
-  if filereadable("zeus.json")
-    return "zeus "
+function! SpecRunner(runner)
+  if a:runner == ""
+    if filereadable("zeus.json")
+      let runner = "zeus "
+    else
+      let runner = "bundle exec "
+    endif
   else
-    return "bundle exec "
+    let runner = a:runner
   endif
+
+  let g:rspec_command = "Dispatch " . runner . "rspec {spec}"
+  return 0
 endfunction
 
-let g:rspec_command = "Dispatch " . SpecRunner() . "rspec {spec}"
-
 " Rspec.vim mappings
-map <Leader>st :call RunCurrentSpecFile()<CR>
-map <Leader>ss :call RunNearestSpec()<CR>
-map <Leader>sl :call RunLastSpec()<CR>
-map <Leader>sa :call RunAllSpecs()<CR>
+map <Leader>st :call SpecRunner("") \| call RunCurrentSpecFile()<CR>
+map <Leader>ss :call SpecRunner("") \| call RunNearestSpec()<CR>
+map <Leader>sl :call SpecRunner("") \| call RunLastSpec()<CR>
+map <Leader>sa :call SpecRunner("bundle exec ") \| call RunAllSpecs()<CR>
 map <Leader>sc :ccl<CR>
 
 " fast saving
