@@ -13,6 +13,16 @@ set encoding=utf-8
 
 filetype plugin indent on
 
+" Setting up Vundle - the vim plugin bundler
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+  echo "Installing Vundle.."
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+endif
+" Setting up Vundle - the vim plugin bundler end
+
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endi
@@ -35,6 +45,7 @@ set showcmd     " display incomplete commands
 set hidden
 
 " Allow undoing for a little bit longer
+silent !mkdir -p ~/.vim/undo
 set undofile                " Save undo's after file closes
 set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000         " How many undos
@@ -120,7 +131,9 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+silent !mkdir -p ~/.vim/_backup
 set backupdir=~/.vim/_backup    " where to put backup files.
+silent !mkdir -p ~/.vim/_temp
 set directory=~/.vim/_temp      " where to put swap files.
 
 if has("statusline") && !&cp
@@ -191,22 +204,30 @@ endfunction
 
 map <leader>n :call RenameFile()<cr>
 
-function! SpecRunner()
-  if filereadable("zeus.json")
-    return "zeus "
+function! SpecRunner(runner)
+  if a:runner == ""
+    if filereadable("zeus.json")
+      let runner = "zeus "
+    else
+      let runner = "bundle exec "
+    endif
   else
-    return "bundle exec "
+    let runner = a:runner
   endif
+
+  let g:rspec_command = "Dispatch " . runner . "rspec {spec}"
+  return 0
 endfunction
 
-let g:rspec_command = "Dispatch " . SpecRunner() . "rspec {spec}"
-
 " Rspec.vim mappings
-map <Leader>st :call RunCurrentSpecFile()<CR>
-map <Leader>ss :call RunNearestSpec()<CR>
-map <Leader>sl :call RunLastSpec()<CR>
-map <Leader>sa :call RunAllSpecs()<CR>
+map <Leader>st :call SpecRunner("") \| call RunCurrentSpecFile()<CR>
+map <Leader>ss :call SpecRunner("") \| call RunNearestSpec()<CR>
+map <Leader>sl :call SpecRunner("") \| call RunLastSpec()<CR>
+map <Leader>sa :call SpecRunner("bundle exec ") \| call RunAllSpecs()<CR>
 map <Leader>sc :ccl<CR>
 
 " fast saving
 map <Leader>w :w<cr>
+
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
